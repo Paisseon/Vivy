@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>darkHeaderColor</key>
+	<string>#ffffff</string>
+	<key>darkTextColor</key>
+	<string>#000000</string>
+	<key>headerColor</key>
+	<string>#000000</string>
+	<key>headerFontPath</key>
+	<string>/Library/Application Support/Pokebox/silkscreen.ttf</string>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>PostNotification</key>
+			<string>ai.paisseon.vivy.prefschanged</string>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>ai.paisseon.vivy</string>
+			<key>key</key>
+			<string>enabled</string>
+			<key>label</key>
+			<string>Enable</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+			<key>detail</key>
+			<string>PSListItemsController</string>
+			<key>default</key>
+			<integer>0</integer>
+			<key>defaults</key>
+			<string>ai.paisseon.vivy</string>
+			<key>PostNotification</key>
+			<string>ai.paisseon.vivy.prefschanged</string>
+			<key>key</key>
+			<string>shape</string>
+			<key>label</key>
+			<string>Fill Shape</string>
+			<key>validTitles</key>
+			<array>
+				<string>Horizontal</string>
+				<string>Vertical</string>
+				<string>Circular</string>
+			</array>
+			<key>validValues</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+			</array>
+		</dict>
+		<dict>
+            <key>cell</key>
+            <string>PSEditTextCell</string>
+            <key>label</key>
+            <string>Select Theme</string>
+            <key>placeholder</key>
+            <string>Type theme name here</string>
+            <key>defaults</key>
+            <string>ai.paisseon.vivy</string>
+            <key>key</key>
+            <string>theme</string> 
+            <key>PostNotification</key>
+            <string>ai.paisseon.vivy.prefschanged</string>
+        </dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		</dict>
+		<dict>
+			<key>PostNotification</key>
+			<string>ai.paisseon.vivy.prefschanged</string>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>ai.paisseon.vivy</string>
+			<key>key</key>
+			<string>percent</string>
+			<key>label</key>
+			<string>Show Percent</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSStaticTextCell</string>
+			<key>label</key>
+			<string>Percent Label X</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>defaults</key>
+			<string>ai.paisseon.vivy</string>
+			<key>PostNotification</key>
+			<string>ai.paisseon.vivy.prefschanged</string>
+			<key>showValue</key>
+			<true/>
+			<key>default</key>
+			<real>5.0</real>
+			<key>min</key>
+			<real>-15.0</real>
+			<key>max</key>
+			<real>15.0</real>
+			<key>isSegmented</key>
+			<true/>
+			<key>key</key>
+			<string>percentX</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSStaticTextCell</string>
+			<key>label</key>
+			<string>Percent Label Y</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>defaults</key>
+			<string>ai.paisseon.vivy</string>
+			<key>PostNotification</key>
+			<string>ai.paisseon.vivy.prefschanged</string>
+			<key>showValue</key>
+			<true/>
+			<key>default</key>
+			<real>5.0</real>
+			<key>min</key>
+			<real>-15.0</real>
+			<key>max</key>
+			<real>15.0</real>
+			<key>isSegmented</key>
+			<true/>
+			<key>key</key>
+			<string>percentY</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSStaticTextCell</string>
+			<key>label</key>
+			<string>Percent Label Font Size</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<integer>8</integer>
+			<key>defaults</key>
+			<string>ai.paisseon.vivy</string>
+			<key>key</key>
+			<string>percentFont</string>
+			<key>min</key>
+			<integer>0</integer>
+			<key>max</key>
+			<integer>20</integer>
+			<key>showValue</key>
+			<true/>
+			<key>isSegmented</key>
+			<true/>
+			<key>PostNotification</key>
+			<string>ai.paisseon.vivy.prefschanged</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>respring</string>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Apply Changes</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>
+I was the most unfortunate.
+I knew that there was no exit out of this maze.
+
+Then, he was the next unfortunate.
+He did not know that there was no exit out of this maze.
+
+But all the rest weren't so unfortunate.
+They didn't know that they were in the maze in the first place.</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>SPCreditCell</string>
+			<key>github</key>
+			<string>vivy</string>
+			<key>label</key>
+			<string>Source Code</string>
+			<key>subtitle</key>
+			<string>View on GitHub</string>
+		</dict>
+	</array>
+	<key>name</key>
+	<string>Vivy</string>
+	<key>subtitle</key>
+	<string>Battery theming engine</string>
+	<key>textColor</key>
+	<string>#ffffff</string>
+</dict>
+</plist>
