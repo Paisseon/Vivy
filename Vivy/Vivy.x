@@ -1,4 +1,4 @@
-#import "Vivy.h"
+#import "Tweak.h"
 
 static void refreshPrefs() {
     CFArrayRef keyList = CFPreferencesCopyKeyList((CFStringRef)bundleIdentifier, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
@@ -29,7 +29,11 @@ static void PreferencesChangedCallback(CFNotificationCenterRef center, void *obs
 	self.pinColor = [UIColor clearColor]; // hide the pin
 	self.bodyColor = [UIColor clearColor]; // hide the body. there's a joke in there somewhere
 	self.fillColor = [UIColor clearColor]; // hide the default fill
-	[self getCurrentBattery]; // get charge percent
+}
+
+- (void) layoutSubviews {
+	%orig;
+	[self getCurrentBattery]; // this fixes a bug some users have where the battery icon only appears on springboard
 }
 
 - (bool) _shouldShowBolt {return false;} // hide charging bolt
@@ -63,8 +67,8 @@ static void PreferencesChangedCallback(CFNotificationCenterRef center, void *obs
 
 	iconPath = [NSString stringWithFormat:@"/Library/Application Support/Vivy/%@/icon.png", theme]; // get normal theme icon
 	[icon setImage:[UIImage imageWithContentsOfFile:iconPath]]; // set theme icon as battery icon
-	if (isCharging) icon.image = [icon.image imageWithTintColor:[UIColor colorWithRed: 0.0 green: 0.61 blue: 0.47 alpha: 1.0]]; // emerald tint if charging
-	else if (isLPM) icon.image = [icon.image imageWithTintColor:[UIColor colorWithRed: 1.0 green: 0.78 blue: 0.17 alpha: 1.0]]; // saffron tint if lpm mode
+	if (isCharging) icon.image = [icon.image imageWithTintColor:[UIColor colorWithRed: 0.0 green: 0.61 blue: 0.47 alpha: 0.75]]; // emerald tint if charging
+	else if (isLPM) icon.image = [icon.image imageWithTintColor:[UIColor colorWithRed: 1.0 green: 0.78 blue: 0.17 alpha: 0.75]]; // saffron tint if lpm mode
 
 	if (percent) {
 		percentLabel = [[UILabel alloc] initWithFrame:[self bounds]]; // init percent label
@@ -84,7 +88,7 @@ static void PreferencesChangedCallback(CFNotificationCenterRef center, void *obs
 	fill.colors = @[chargedFill, chargedFill, drainedFill, drainedFill]; // colourise the battery
 	fill.locations = locations; // fill icon to the percentage of battery level
 	if (shape == 2) {
-		fill.type = kCAGradientLayerConic; // for some reason circular gradient is called conic?
+		fill.type = kCAGradientLayerConic; // for some reason clockwise gradient is called conic? whatever, it's what works
 		fill.startPoint = CGPointMake(0.5, 0.5); // start in the centre
 		fill.endPoint = CGPointMake(0.5, 0); // loop around
 	} else if (shape == 1) {

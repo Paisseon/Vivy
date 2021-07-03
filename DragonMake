@@ -1,0 +1,26 @@
+name: Vivy
+id: ai.paisseon.vivy
+version: 1.1
+desc: What does it mean to sing from your heart?
+architecture: iphoneos-arm
+author: paisseon
+icmd: sbreload
+
+all:
+  targetvers: 13.0
+  archs:
+    - arm64
+    - arm64e
+
+Vivy:
+  dir: Vivy
+  type: tweak
+  logos_files:
+    - "Vivy.x"
+    
+VivyPrefs:
+  dir: Prefs
+  type: prefs
+  objc_files:
+    - "*.m"
+    - "SkittyPrefs/*.m"
