@@ -1,4 +1,4 @@
-#import "Tweak.h"
+#import "Vivy.h"
 
 static void refreshPrefs() {
     CFArrayRef keyList = CFPreferencesCopyKeyList((CFStringRef)bundleIdentifier, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
@@ -14,7 +14,7 @@ static void refreshPrefs() {
     percentX = [([settings objectForKey:@"percentX"] ?: @(5.0)) doubleValue];
     percentY = [([settings objectForKey:@"percentY"] ?: @(-5.0)) doubleValue];
     percentFont = [([settings objectForKey:@"percentFont"] ?: @(8)) integerValue];
-    theme = [[([settings objectForKey:@"theme"] ?: @"linear") stringValue] lowercaseString];
+    theme = [([settings objectForKey:@"theme"] ?: @(0)) integerValue]; // 5 uses the image uploaded by user in libGCUniversal
 }
 
 static void PreferencesChangedCallback(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
@@ -29,6 +29,7 @@ static void PreferencesChangedCallback(CFNotificationCenterRef center, void *obs
 	self.pinColor = [UIColor clearColor]; // hide the pin
 	self.bodyColor = [UIColor clearColor]; // hide the body. there's a joke in there somewhere
 	self.fillColor = [UIColor clearColor]; // hide the default fill
+	[self getCurrentBattery]; // get charge percent
 }
 
 - (void) layoutSubviews {
@@ -67,8 +68,8 @@ static void PreferencesChangedCallback(CFNotificationCenterRef center, void *obs
 
 	iconPath = [NSString stringWithFormat:@"/Library/Application Support/Vivy/%@/icon.png", theme]; // get normal theme icon
 	[icon setImage:[UIImage imageWithContentsOfFile:iconPath]]; // set theme icon as battery icon
-	if (isCharging) icon.image = [icon.image imageWithTintColor:[UIColor colorWithRed: 0.0 green: 0.61 blue: 0.47 alpha: 0.75]]; // emerald tint if charging
-	else if (isLPM) icon.image = [icon.image imageWithTintColor:[UIColor colorWithRed: 1.0 green: 0.78 blue: 0.17 alpha: 0.75]]; // saffron tint if lpm mode
+	if (isCharging) icon.image = [icon.image imageWithTintColor:[UIColor colorWithRed: 0.0 green: 0.61 blue: 0.47 alpha: 1.0]]; // emerald tint if charging
+	else if (isLPM) icon.image = [icon.image imageWithTintColor:[UIColor colorWithRed: 1.0 green: 0.78 blue: 0.17 alpha: 1.0]]; // saffron tint if lpm mode
 
 	if (percent) {
 		percentLabel = [[UILabel alloc] initWithFrame:[self bounds]]; // init percent label
@@ -88,7 +89,7 @@ static void PreferencesChangedCallback(CFNotificationCenterRef center, void *obs
 	fill.colors = @[chargedFill, chargedFill, drainedFill, drainedFill]; // colourise the battery
 	fill.locations = locations; // fill icon to the percentage of battery level
 	if (shape == 2) {
-		fill.type = kCAGradientLayerConic; // for some reason clockwise gradient is called conic? whatever, it's what works
+		fill.type = kCAGradientLayerConic; // for some reason circular gradient is called conic?
 		fill.startPoint = CGPointMake(0.5, 0.5); // start in the centre
 		fill.endPoint = CGPointMake(0.5, 0); // loop around
 	} else if (shape == 1) {
