@@ -3,13 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>darkHeaderColor</key>
-	<string>#ffffff</string>
+	<string>#000000</string>
 	<key>darkTextColor</key>
 	<string>#000000</string>
 	<key>headerColor</key>
 	<string>#000000</string>
-	<key>headerFontPath</key>
-	<string>/Library/Application Support/Pokebox/silkscreen.ttf</string>
 	<key>items</key>
 	<array>
 		<dict>
@@ -45,7 +43,7 @@
 			<array>
 				<string>Horizontal</string>
 				<string>Vertical</string>
-				<string>Circular</string>
+				<string>Clockwise</string>
 			</array>
 			<key>validValues</key>
 			<array>
@@ -55,19 +53,59 @@
 			</array>
 		</dict>
 		<dict>
-            <key>cell</key>
-            <string>PSEditTextCell</string>
-            <key>label</key>
-            <string>Select Theme</string>
-            <key>placeholder</key>
-            <string>Type theme name here</string>
-            <key>defaults</key>
-            <string>ai.paisseon.vivy</string>
-            <key>key</key>
-            <string>theme</string> 
-            <key>PostNotification</key>
-            <string>ai.paisseon.vivy.prefschanged</string>
-        </dict>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+			<key>detail</key>
+			<string>PSListItemsController</string>
+			<key>default</key>
+			<integer>0</integer>
+			<key>defaults</key>
+			<string>ai.paisseon.vivy</string>
+			<key>PostNotification</key>
+			<string>ai.paisseon.vivy.prefschanged</string>
+			<key>key</key>
+			<string>theme</string>
+			<key>label</key>
+			<string>Battery Icon</string>
+			<key>validTitles</key>
+			<array>
+				<string>Linear</string>
+				<string>Zelda</string>
+				<string>Android</string>
+				<string>Ring</string>
+				<string>Blank</string>
+				<string>Custom</string>
+			</array>
+			<key>validValues</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+				<integer>3</integer>
+				<integer>4</integer>
+				<integer>5</integer>
+			</array>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>cellClass</key>
+			<string>LIPImageChooseCell</string>
+			<key>label</key>
+			<string>Custom Icon</string>
+			<key>action</key>
+			<string>chooseImage</string>
+			<key>defaults</key>
+			<string>ai.paisseon.vivy</string>
+			<key>PostNotification</key>
+			<string>ai.paisseon.vivy.prefschanged</string>
+			<key>key</key>
+			<string>customIcon</string>
+			<key>usesJPEG</key>
+			<false/>
+			<key>compressionQuality</key>
+			<real>1.0</real>
+		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -204,7 +242,7 @@ They didn't know that they were in the maze in the first place.</string>
 	<key>name</key>
 	<string>Vivy</string>
 	<key>subtitle</key>
-	<string>Battery theming engine</string>
+	<string>v1.2.0</string>
 	<key>textColor</key>
 	<string>#ffffff</string>
 </dict>

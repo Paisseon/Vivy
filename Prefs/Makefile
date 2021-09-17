@@ -1,6 +1,3 @@
-TARGET = iphone:clang:latest:13.0
-ARCHS = arm64 arm64e
-
 include $(THEOS)/makefiles/common.mk
 
 BUNDLE_NAME = VivyPrefs
@@ -9,6 +6,7 @@ $(BUNDLE_NAME)_FILES = $(wildcard *.m) $(wildcard SkittyPrefs/*.m)
 $(BUNDLE_NAME)_INSTALL_PATH = /Library/PreferenceBundles
 $(BUNDLE_NAME)_FRAMEWORKS = UIKit CoreGraphics CoreText QuartzCore
 $(BUNDLE_NAME)_PRIVATE_FRAMEWORKS = Preferences
+$(TWEAK_NAME)_LIBRARIES = imagepicker
 $(BUNDLE_NAME)_CFLAGS = -fobjc-arc
 
 include $(THEOS_MAKE_PATH)/bundle.mk

@@ -1,10 +1,12 @@
 Package: ai.paisseon.vivy
 Name: Vivy
-Author: paisseon
-Description: Fluorite Ion's Song
-Maintainer: paisseon
-Version: 1.0
-Depends: firmware (>= 13.0), mobilesubstrate, preferenceloader
+Author: Paisseon
+Description: Free battery theming engine
+Maintainer: Paisseon
+Version: 1.2
+Depends: firmware (>= 13.0), mobilesubstrate, preferenceloader, com.muirey03.libimagepicker
+Conflicts: com.spark.juice
 Architecture: iphoneos-arm
-Icon: https://i.imgur.com/5Bmm40D.png
+Icon: https://paisseon.github.io/info/vivy.png
 SileoDepiction: https://paisseon.github.io/info/vivy.json
+Depiction: https://paisseon.github.io/info/vivy.html

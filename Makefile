@@ -1,16 +1,16 @@
-SYSROOT = $(THEOS)/sdks/iPhoneOS13.3.sdk
-ARCHS = arm64 arm64e
-TARGET := iphone:clang:latest:13.0
-INSTALL_TARGET_PROCESSES = SpringBoard
+export SYSROOT = $(THEOS)/sdks/iPhoneOS14.4.sdk/
+export ARCHS = arm64 arm64e
+export TARGET = iphone:clang:latest:13.0
 
-FINAL_RELEASE = 1
+FINALPACKAGE = 1
 DEBUG = 0
 
+INSTALL_TARGET_PROCESSES = SpringBoard
 TWEAK_NAME = Vivy
-
-$(TWEAK_NAME)_FILES = Vivy.x
-$(TWEAK_NAME)_CFLAGS = -fobjc-arc
+$(TWEAK_NAME)_FILES = $(TWEAK_NAME).x
+$(TWEAK_NAME)_CFLAGS = -fobjc-arc -Wno-error=deprecated-declarations
 $(TWEAK_NAME)_EXTRA_FRAMEWORKS = CoreGraphics QuartzCore UIKit
+$(TWEAK_NAME)_LIBRARIES = imagepicker
 
 SUBPROJECTS += Prefs
 
