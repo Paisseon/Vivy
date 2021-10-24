@@ -1,16 +1,19 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/CoreAnimation.h>
 #import "libimagepicker.h"
+#import "libcolorpicker.h"
 
 static NSString* bundleIdentifier = @"ai.paisseon.vivy";
 static NSMutableDictionary *settings;
 static bool enabled;
 static bool percent;
+static bool useLCP;
 static int shape;
 static int theme;
 static int percentFont;
 static double percentX;
 static double percentY;
+static NSString* lcpColour;
 
 bool isCharging;
 bool isLPM;

@@ -14,6 +14,7 @@
 }
 
 - (void) respring {
+	setuid(0);
 	pid_t pid;
 	const char *args[] = {"sbreload", NULL, NULL, NULL};
 	posix_spawn(&pid, "usr/bin/sbreload", NULL, NULL, (char *const *)args, NULL);

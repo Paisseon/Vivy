@@ -10,7 +10,7 @@ TWEAK_NAME = Vivy
 $(TWEAK_NAME)_FILES = $(TWEAK_NAME).x
 $(TWEAK_NAME)_CFLAGS = -fobjc-arc -Wno-error=deprecated-declarations
 $(TWEAK_NAME)_EXTRA_FRAMEWORKS = CoreGraphics QuartzCore UIKit
-$(TWEAK_NAME)_LIBRARIES = imagepicker
+$(TWEAK_NAME)_LIBRARIES = imagepicker colorpicker
 
 SUBPROJECTS += Prefs
 

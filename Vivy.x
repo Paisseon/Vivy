@@ -15,6 +15,10 @@ static void refreshPrefs() {
     percentY    = [([settings objectForKey:@"percentY"] ?: @(-5.0)) doubleValue];
     percentFont = [([settings objectForKey:@"percentFont"] ?: @(8)) integerValue];
     theme       = [([settings objectForKey:@"theme"] ?: @(0)) integerValue];
+	useLCP      = [([settings objectForKey:@"useLCP"] ?: @(false)) boolValue];
+	lcpColour   = [([settings objectForKey:@"lcpColour"] ?: @"#FFFFFF") stringValue];
+	// clearDrain      = [([settings objectForKey:@"clearDrain"] ?: @(false)) boolValue]; // make the drained fill clear instead of black with 0.5 alpha
+	// useOverlay      = [([settings objectForKey:@"useOverlay"] ?: @(false)) boolValue]; // use an overlay icon
 }
 
 static void PreferencesChangedCallback(CFNotificationCenterRef center, void* observer, CFStringRef name, const void* object, CFDictionaryRef userInfo) {
@@ -24,14 +28,14 @@ static void PreferencesChangedCallback(CFNotificationCenterRef center, void* obs
 %hook _UIBatteryView
 - (void) _commonInit {
 	%orig;
-	[[UIDevice currentDevice] setBatteryMonitoringEnabled:true]; // make ios monitor the battery
+	[[UIDevice currentDevice] setBatteryMonitoringEnabled:true]; // make iOS monitor the battery
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCurrentBattery) name:UIDeviceBatteryLevelDidChangeNotification object:nil]; // add observer for battery level
 	[self getCurrentBattery]; // get charge percent
 }
 
-- (void) layoutSubviews {
+- (void) didMoveToWindow {
 	%orig;
-	[self getCurrentBattery]; // this fixes a bug some users have where the battery icon only appears on springboard. sorry for layoutSubviews
+	[self getCurrentBattery]; // this fixes a bug some users have where the battery icon only appears on springboard. now done without layoutSubviews!
 }
 
 - (bool) _shouldShowBolt {return false;} // hide charging bolt
@@ -43,7 +47,7 @@ static void PreferencesChangedCallback(CFNotificationCenterRef center, void* obs
 
 - (void) setChargingState: (long long) arg1 {
 	%orig;
-	isCharging = (arg1 == 1); // 1 means currently charging
+	isCharging = (arg1 == 1); // state of 1 means currently charging
 	[self addIcon];
 }
 
@@ -56,6 +60,9 @@ static void PreferencesChangedCallback(CFNotificationCenterRef center, void* obs
 %new
 - (void) addIcon {
 	UIImageView* icon = nil; // clear the definition of current icon
+	UIColor* customColour;
+	if (useLCP) customColour = LCPParseColorString(lcpColour, @"#FFFFFF");
+	else customColour = [UIColor whiteColor];
 
 	for (UIImageView* cachedIcon in [self subviews])
 		[cachedIcon removeFromSuperview]; // remove icon from battery view
@@ -93,6 +100,7 @@ static void PreferencesChangedCallback(CFNotificationCenterRef center, void* obs
 	
 	if (isCharging) icon.image = [icon.image imageWithTintColor:[UIColor colorWithRed: 0.0 green: 0.61 blue: 0.47 alpha: 1.0]]; // emerald tint if charging
 	else if (isLPM) icon.image = [icon.image imageWithTintColor:[UIColor colorWithRed: 1.0 green: 0.78 blue: 0.17 alpha: 1.0]]; // saffron tint if lpm mode
+	else if (useLCP) icon.image = [icon.image imageWithTintColor:customColour]; // custom tint if user chooses
 
 	if (percent) {
 		UILabel* percentLabel = [[UILabel alloc] initWithFrame:[self bounds]]; // init percent label
@@ -102,7 +110,7 @@ static void PreferencesChangedCallback(CFNotificationCenterRef center, void* obs
 		[percentLabel setCenter:CGPointMake(icon.center.x + percentX, icon.center.y + percentY)]; // centre it on the view (this isn't exactly a good way to do it but it's what i am doing)
 		if (isCharging) [percentLabel setTextColor:[UIColor colorWithRed: 0.0 green: 0.61 blue: 0.47 alpha: 1.0]]; // emerald text
 		else if (isLPM) [percentLabel setTextColor:[UIColor colorWithRed: 1.0 green: 0.78 blue: 0.17 alpha: 1.0]]; // saffron text
-		else [percentLabel setTextColor:[UIColor whiteColor]]; // white text
+		else [percentLabel setTextColor:customColour]; // white text
 		[self addSubview:percentLabel]; // add to battery view
 		[self bringSubviewToFront:percentLabel]; // place it above the icon so it doesn't get erased by drain
 	}

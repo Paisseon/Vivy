@@ -3,9 +3,8 @@ Name: Vivy
 Author: Paisseon
 Description: Free battery theming engine
 Maintainer: Paisseon
-Version: 1.2
-Depends: firmware (>= 13.0), mobilesubstrate, preferenceloader, com.muirey03.libimagepicker
-Conflicts: com.spark.juice
+Version: 1.3
+Depends: firmware (>= 13.0), mobilesubstrate, preferenceloader, com.muirey03.libimagepicker, org.thebigboss.libcolorpicker, emt.paisseon.lipfix
 Architecture: iphoneos-arm
 Icon: https://paisseon.github.io/info/vivy.png
 SileoDepiction: https://paisseon.github.io/info/vivy.json
